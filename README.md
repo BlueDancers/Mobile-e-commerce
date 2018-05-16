@@ -1,31 +1,23 @@
-# my-project
+#使用 vue + kao + mongdb的webapp项目 
 
-> A Vue.js project
+总的来说,学编程也有快一年时间了,
 
-## Build Setup
+最开始学校教的java到后自学的
 
-``` bash
-# install dependencies
-npm install
+html css3 JavaScript mysql jquery spring docker linux
 
-# serve with hot reload at localhost:8080
-npm run dev
+vue全家桶 webpack mongdb node.js koa2
 
-# build for production with minification
-npm run build
+一直写的都是很小的项目 没有后端 或者使用 json-server 模拟后端
 
-# build for production and view the bundle analyzer report
-npm run build --report
+有时候我在想 我现在去学习 node是不是早了 前端 react 和ng都没有学过,出去找工作可能会比较麻烦
 
-# run unit tests
-npm run unit
+回想一下 只懂前端完全不都 不懂原理 比如 cookies怎么设置的 还有 登录验证 等等等 鉴定了 入后端的决心 
 
-# run e2e tests
-npm run e2e
+打算写一个类似淘宝的webapp 作为对后端 知识的巩固 提升vue使用的熟练度  
 
-# run all tests
-npm test
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-"# Mobile-e-commerce" 
+
+
+
+​																		2018-5-16
