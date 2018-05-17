@@ -17,7 +17,7 @@
     <div class="swiper-area">
       <van-swipe :autoplay="2000" class="van-swipe">
         <van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
-          <img v-lazy="banner.imageUrl" width="100%">   <!-- 这里的懒加载后面写-->
+          <img v-lazy="banner.image" width="100%">   <!-- 这里的懒加载后面写-->
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -30,33 +30,65 @@
     <div class="ad-adver">
       <img v-lazy="advertest" width="100%">
     </div>
-
+    <div class="recommend-list">
+      <div class="recommend-title">
+        商品推荐
+      </div>
+      <div class="recommend-body">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(item,index) in recommendGoods" :key="index">
+            <div class="recommed-item">
+              <img :src="item.image" width="80%">
+              <div>{{item.goodName}}</div>
+              <div>${{item.price}} (${{item.mallPrice}})</div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
+    <!-- <swiperdefault></swiperdefault> 关于比较多的vue-awesome-swiper api在这里面 -->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import 'swiper/dist/css/swiper.css'
+import swiperdefault from '../swiper/swiperDefault'
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
+  components: {
+    swiper,
+    swiperSlide,
+    swiperdefault
+  },
   data() {
     return {
       locationIcon: require('../../assets/images/location.png'),
-      bannerPicArray: [
-        {imageUrl:require('../../assets/images/simleVueDemoPic002.jpg')},
-        {imageUrl:require('../../assets/images/simleVueDemoPic001.jpg')},
-        {imageUrl:require('../../assets/images/simleVueDemoPic003.jpg')}
-      ],
+      bannerPicArray: [],
       category: [],
-      advertest: ''
+      advertest: '',
+      recommendGoods: '',
+      floor1: [],
+      swiperOption: {
+        slidesPerView:3,
+        loop:true,     //无限滚动
+         pagination: {
+            el: '.swiper-pagination',
+            clickable:true
+        }
+      }
     }
   },
   created () {
     axios.get('https://www.easy-mock.com/mock/5afc389de5c64d22cc1ca565/data/data#!method=get')
     .then((data)=>{
-      console.log(data.data.data.category);
       if(data.status == 200) {
         console.log(data.data.data)
         this.advertest = data.data.data.advertesPicture.PICTURE_ADDRESS
         this.category = data.data.data.category
+        this.bannerPicArray = data.data.data.slides
+        this.recommendGoods = data.data.data.recommend
+        this.floor1 = data.data.data.floor1
       }
     })
     .catch(()=> {
@@ -90,12 +122,12 @@ export default {
   top: 0.4rem;
 }
 .van-swipe {
-  height:9rem;
+  height:8rem;
 }
 .swiper-area {
   width: 20rem;
   clear: both;
-  height: 9rem;
+  height: 8rem;
 }
 .type-bar{
   background-color: #fff;
@@ -106,6 +138,23 @@ export default {
 }
 .type-bar div{
   padding: .3rem;
+  font-size: 12px;
+  text-align: center;
+}
+.recommend-list {
+  background: #fff;
+  margin-top: 0.3rem
+}
+.recommend-title {
+  border: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+  padding: .2rem;
+  color: #e5017d;
+}
+.recommed-item {
+  width:100%;
+  border-right: 1px solid #eee;
   font-size: 12px;
   text-align: center;
 }
